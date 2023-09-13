@@ -1,0 +1,55 @@
+isClusterService: false
+serviceType: NodePort
+servers:
+  - zones:
+      - zone: .
+    port: 53
+    plugins:
+      - name: log
+      - name: errors
+      - name: health
+        configBlock: |-
+          lameduck 5s
+      - name: ready
+      - name: file
+        parameters: /etc/coredns/example-host.db example.com
+      - name: cache
+        parameters: 30
+      - name: loop
+      - name: reload
+      - name: loadbalance
+  - zones:
+      - zone: .
+    port: 30053
+    nodePort: 30053
+    plugins:
+      - name: log
+      - name: errors
+      - name: health
+        configBlock: |-
+          lameduck 5s
+      - name: ready
+      - name: file
+        parameters: /etc/coredns/example-local.db example.com
+      - name: cache
+        parameters: 30
+      - name: loop
+      - name: reload
+      - name: loadbalance
+zoneFiles:
+  - filename: example-host.db
+    domain: example.com
+    contents: |
+      example.com.   IN SOA sns.dns.icann.com. noc.dns.icann.com. 2015082541 7200 3600 1209600 3600
+      example.com.   IN NS  b.iana-servers.net.
+      example.com.   IN NS  a.iana-servers.net.
+      example.com.   IN A   192.168.127.2
+      *.example.com. IN A   192.168.127.2
+  - filename: example-local.db
+    domain: example.com
+    contents: |
+      example.com.   IN SOA sns.dns.icann.com. noc.dns.icann.com. 2015082541 7200 3600 1209600 3600
+      example.com.   IN NS  b.iana-servers.net.
+      example.com.   IN NS  a.iana-servers.net.
+      example.com.   IN A   127.0.0.1
+      *.example.com. IN A   127.0.0.1

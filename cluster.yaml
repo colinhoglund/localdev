@@ -1,0 +1,35 @@
+---
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+containerdConfigPatches:
+- |-
+  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."registry.example.com"]
+    endpoint = ["https://registry.example.com"]
+  [plugins."io.containerd.grpc.v1.cri".registry.configs."registry.example.com".tls]
+    insecure_skip_verify = true
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+  - |
+    kind: ClusterConfiguration
+    apiServer:
+      extraArgs:
+        enable-admission-plugins: PodSecurity
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
+  - containerPort: 30053
+    hostPort: 30053
+    protocol: TCP
+  - containerPort: 30053
+    hostPort: 30053
+    protocol: UDP
