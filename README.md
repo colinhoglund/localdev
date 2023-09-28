@@ -10,17 +10,19 @@ Setup a kind cluster for local development on macOS.
 
 ## Usage
 
-Install a podman VM
+Install a podman VM.
 ```
 make podman-init
 ```
 
-Configure Kind cluster (requires sudo password to add /etc/resolver/example.com)
+Configure Kind cluster (requires sudo password to add /etc/resolver/example.com).
 ```
 make kind-all
 ```
 
-Verify local DNS is working
+Verify local DNS is working.
 ```
 curl -i http://registry.example.com/v2/
 ```
+
+Run `make help` to get a list of commands for managing the local cluster.
