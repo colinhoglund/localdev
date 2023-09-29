@@ -23,6 +23,7 @@ podman-init: ## Initialize a new podman VM
 	cat config/kind/insecure-registry.config | podman machine ssh "cat > /etc/containers/registries.conf.d/registry-example-com.conf"
 	# sets the max_map_count necessary for using Elasticsearch
 	podman machine ssh 'sysctl -w vm.max_map_count=262144'
+	podman machine ssh 'echo 127.0.0.1 registry.example.com >> /etc/hosts'
 
 ## kind targets
 .PHONY: kind
