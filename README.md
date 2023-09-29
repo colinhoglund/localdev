@@ -1,6 +1,6 @@
 # localdev
 
-Setup a kind cluster for local development on macOS.
+Setup a [kind](https://kind.sigs.k8s.io/) cluster for local development on macOS.
 
 ## Requirements
 - [go](https://go.dev/doc/install)
