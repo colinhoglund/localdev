@@ -15,7 +15,7 @@ Initialize a podman VM.
 make podman-init
 ```
 
-Configure a kind cluster (requires sudo password to add /etc/resolver/example.com).
+Configure a kind cluster (requires sudo password to add `/etc/resolver/example.com`).
 ```
 make kind-all
 ```
