@@ -30,7 +30,10 @@ Verify registry is working.
 podman pull alpine:latest
 podman tag alpine:latest registry.example.com/alpine:latest
 podman push --tls-verify=false registry.example.com/alpine:latest
-curl http://registry.example.com/v2/alpine/tags/list
+
+kubectl --kubeconfig ~/.kube/config.kind-kind --context kind-kind run \
+  -it --rm --restart=Never --image registry.example.com/alpine:latest alpine-test \
+  -- uname
 ```
 
 Run `make help` to get a list of commands for managing the local cluster.
