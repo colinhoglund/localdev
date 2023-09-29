@@ -25,4 +25,12 @@ Verify local DNS is working.
 curl -i http://registry.example.com/v2/
 ```
 
+Verify registry is working
+```
+podman pull alpine:latest
+podman tag alpine:latest registry.example.com/alpine:latest
+podman push --tls-verify=false registry.example.com/alpine:latest
+curl http://registry.example.com/v2/alpine/tags/list
+```
+
 Run `make help` to get a list of commands for managing the local cluster.
