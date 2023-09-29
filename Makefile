@@ -68,4 +68,4 @@ service-registry: ## Install a registry service in the kind cluster
 
 .PHONY: service-nginx
 service-nginx: ## Install the nginx ingress controller service in the kind cluster
-	$(KUBECTLCMD) apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+	$(KUBECTLCMD) apply -f ./config/kube/nginx.yaml
