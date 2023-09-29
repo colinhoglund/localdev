@@ -10,12 +10,12 @@ Setup a kind cluster for local development on macOS.
 
 ## Usage
 
-Install a podman VM.
+Initialize a podman VM.
 ```
 make podman-init
 ```
 
-Configure Kind cluster (requires sudo password to add /etc/resolver/example.com).
+Configure a kind cluster (requires sudo password to add /etc/resolver/example.com).
 ```
 make kind-all
 ```
@@ -25,7 +25,7 @@ Verify local DNS is working.
 curl -i http://registry.example.com/v2/
 ```
 
-Verify registry is working
+Verify registry is working.
 ```
 podman pull alpine:latest
 podman tag alpine:latest registry.example.com/alpine:latest
