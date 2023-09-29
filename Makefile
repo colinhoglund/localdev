@@ -38,7 +38,7 @@ kind-restart: ## Restart a stopped kind cluster
 
 .PHONY: kind-start
 kind-start: ## Start the kind cluster without services
-	localdev kind start --k8s-version=$(KUBEVERSION) --config-file ./cluster.yaml
+	localdev kind start --k8s-version=$(KUBEVERSION) --config-file ./config/cluster.yaml
 
 .PHONY: kind-delete
 kind-delete: ## Destroy the kind cluster
@@ -50,7 +50,7 @@ service-coredns: ## Install example.com coredns service in the kind cluster
 	helm repo add coredns https://coredns.github.io/helm
 	$(HELMCMD) install \
 		--namespace kube-system \
-		--values ./values/coredns.yaml \
+		--values ./config/helm/coredns.yaml \
 		--version 1.21.0 \
 		coredns-example-com \
 		coredns/coredns
@@ -61,7 +61,7 @@ service-registry: ## Install a registry service in the kind cluster
 	helm repo add twunio https://helm.twun.io
 	$(HELMCMD) install \
 		--namespace kube-system \
-		--values ./values/registry.yaml \
+		--values ./config/helm/registry.yaml \
 		--version 2.2.2 \
 		registry \
 		twunio/docker-registry
